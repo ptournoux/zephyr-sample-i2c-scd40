@@ -1,0 +1,22 @@
+
+ / {
+    aliases {
+        /* Create an alias for easier access in the application code */
+        scd40 = &scd40_node;
+    };
+};
+
+
+&i2c2 { 
+    status = "okay"; /* Ensure the I2C controller is enabled */
+    /*
+     * Add the SCD40 sensor node as a child of the I2C2 controller.
+     * The node label 'scd40_node' is used for the alias above.
+     * The I2C address for SCD40/SCD41 is 0x62.
+     */
+    scd40_node: scd40@62 {
+        compatible = "sensirion,scd40";
+        reg = <0x62>; /* I2C device address as specifed in the doc : https://docs.m5stack.com/en/unit/co2 */
+        status = "okay";
+    };
+};
